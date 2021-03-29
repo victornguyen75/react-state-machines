@@ -1,13 +1,16 @@
-import { useEffect, useState } from "react";
+import { useEffect, useReducer } from "react";
+import { reducer } from "./components/reducer.js";
 import "./App.css";
 
 function App() {
-  const color = "Green";
-  const [timeLeft, setTimeLeft] = useState(10);
+  const [trafficLight, setTrafficLight] = useReducer(reducer, {
+    color: "Green",
+    timer: 10,
+  });
 
   useEffect(() => {
     const timer = setTimeout(() => {
-      setTimeLeft(timeLeft < 1 ? 10 : timeLeft - 1);
+      setTrafficLight();
     }, 1000);
 
     return () => clearTimeout(timer);
@@ -15,8 +18,11 @@ function App() {
 
   return (
     <div className="App">
-      <p>Traffic Light: {color}</p>
-      <p>Time left: {timeLeft}</p>
+      <h3>Moore State Machine</h3>
+      <p className={trafficLight.color.toLowerCase()}>
+        Traffic Light: {trafficLight.color}
+      </p>
+      <p>Time left: {trafficLight.timer}</p>
     </div>
   );
 }
