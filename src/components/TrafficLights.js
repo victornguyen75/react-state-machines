@@ -1,5 +1,5 @@
 import { useEffect, useReducer } from "react";
-import { reducer } from "./reducer.js";
+import { reducer } from "./trafficLightsReducer.js";
 
 export default function TrafficLights() {
   const [trafficLight, setTrafficLight] = useReducer(reducer, {
